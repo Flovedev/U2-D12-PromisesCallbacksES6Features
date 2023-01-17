@@ -10,7 +10,6 @@ const getImg = (fetchvalue) => {
     }).then((jsonImgs) => {
         // console.log(jsonImgs.photos[0].src.medium)
         let imgNode = document.querySelectorAll(".card")
-        console.log(jsonImgs)
 
         for (let index = 0; index < imgNode.length; index++) {
             const element = jsonImgs.photos[index];
