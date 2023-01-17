@@ -1,9 +1,9 @@
 const getImg = (fetchvalue) => {
-    fetch(fetchvalue, {
+    fetch(`https://api.pexels.com/v1/search?query=${fetchvalue}`, {
         method: "GET",
         headers: {
-            Authorization: "563492ad6f91700001000001ff1871e4875b4ccab75f9931a506287f"
-        }
+            Authorization: "Bearer 563492ad6f91700001000001ff1871e4875b4ccab75f9931a506287f"
+        },
     }).then((rawImgs) => {
         return rawImgs.json()
 
@@ -14,7 +14,6 @@ const getImg = (fetchvalue) => {
 
         for (let index = 0; index < imgNode.length; index++) {
             const element = jsonImgs.photos[index];
-
 
             imgNode[index].innerHTML = `
             <img src="${element.src.medium}" class="imgs-to-hide" alt="">
@@ -29,7 +28,7 @@ const getImg = (fetchvalue) => {
                 <button type="button" class="btn btn-sm btn-outline-secondary">
                   View
                 </button>
-                <button type="button" onClick="removeCard(this)" class="btn btn-sm btn-outline-secondary">
+                <button type="button" onclick="deleteCard(this)" class="btn btn-sm btn-outline-secondary hide-button">
                   Hide
                 </button>
               </div>
@@ -38,11 +37,13 @@ const getImg = (fetchvalue) => {
     }).catch(err => console.log(err))
 }
 
-function removeCard(elem) {
-    let cardNode = $(elem).parentElement()
-    console.log(cardNode)
-    // .remove();
+const deleteCard = (element) => {
+    element.closest('.card').classList.add("d-none")
 }
-removeCard()
 
+const searchSelector = () => {
+    let textNode = document.getElementById('search-bar').value
+    console.log(textNode)
+    return textNode
+}
 
